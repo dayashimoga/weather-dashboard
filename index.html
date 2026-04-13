@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard — Beautiful Forecasts | QuickUtils</title>
+    <meta name="description" content="Interactive weather dashboard with 5-day forecasts, sunrise/sunset times, UV index, air quality, and beautiful dynamic visualizations using Open-Meteo API.">
+    <meta name="keywords" content="weather, forecast, dashboard, temperature, UV, humidity, rain, QuickUtils">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://quickutils.top/weather-dashboard/">
+    <meta property="og:title" content="Weather Dashboard — Beautiful Forecasts | QuickUtils">
+    <meta property="og:description" content="Interactive weather dashboard with dynamic visualizations and 5-day forecasts.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌤️</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="navbar"><div class="container nav-inner">
+    <a href="/" class="brand">🌤️ <span>WeatherDash</span></a>
+    <div class="nav-links">
+        <a href="https://ko-fi.com/dayatin" target="_blank" rel="noopener" class="kofi-link">☕ Support</a>
+        <a href="https://quickutils.top" target="_blank">QuickUtils</a>
+    </div>
+    <button class="theme-btn" id="themeBtn">🌙</button>
+</div></nav>
+<main class="container">
+    <section class="hero">
+        <h1><span class="gradient-text">Weather Dashboard</span></h1>
+        <p class="hero-sub">Beautiful forecasts with dynamic visualizations — No API key needed</p>
+    </section>
+    <div class="search-bar glass-card">
+        <input type="text" id="cityInput" placeholder="Enter city name (e.g. London, Tokyo, New York)..." class="search-input">
+        <button class="btn btn-primary" id="searchBtn">🔍 Search</button>
+        <button class="btn btn-secondary" id="geoBtn">📍 My Location</button>
+    </div>
+
+    <div id="loading" class="loading hidden">
+        <div class="spinner"></div>
+        <p>Fetching weather data...</p>
+    </div>
+
+    <div id="weatherContent" class="hidden">
+        <div class="current-weather glass-card">
+            <div class="current-main">
+                <div class="weather-icon" id="weatherIcon">☀️</div>
+                <div class="current-temp">
+                    <span class="temp-value" id="currentTemp">--</span>
+                    <span class="temp-unit">°C</span>
+                </div>
+                <div class="current-desc">
+                    <h2 id="cityName">--</h2>
+                    <p id="weatherDesc">--</p>
+                    <p class="feels-like">Feels like <span id="feelsLike">--</span>°C</p>
+                </div>
+            </div>
+            <div class="weather-details">
+                <div class="detail"><span class="detail-icon">💧</span><span class="detail-label">Humidity</span><span class="detail-value" id="humidity">--%</span></div>
+                <div class="detail"><span class="detail-icon">💨</span><span class="detail-label">Wind</span><span class="detail-value" id="wind">-- km/h</span></div>
+                <div class="detail"><span class="detail-icon">🌡️</span><span class="detail-label">Pressure</span><span class="detail-value" id="pressure">-- hPa</span></div>
+                <div class="detail"><span class="detail-icon">☀️</span><span class="detail-label">UV Index</span><span class="detail-value" id="uvIndex">--</span></div>
+                <div class="detail"><span class="detail-icon">🌅</span><span class="detail-label">Sunrise</span><span class="detail-value" id="sunrise">--:--</span></div>
+                <div class="detail"><span class="detail-icon">🌇</span><span class="detail-label">Sunset</span><span class="detail-value" id="sunset">--:--</span></div>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <h3 class="card-title">📊 Hourly Forecast (24h)</h3>
+            <div class="hourly-scroll" id="hourlyForecast"></div>
+        </div>
+
+        <div class="glass-card">
+            <h3 class="card-title">📅 7-Day Forecast</h3>
+            <div id="dailyForecast" class="daily-grid"></div>
+        </div>
+
+        <div class="glass-card">
+            <h3 class="card-title">🌡️ Temperature Chart</h3>
+            <canvas id="tempChart" width="800" height="250"></canvas>
+        </div>
+    </div>
+</main>
+<footer class="footer"><div class="container footer-inner">
+    <div class="footer-brand"><span>🌤️ WeatherDash</span><p>Part of <a href="https://quickutils.top">QuickUtils</a></p></div>
+    <p class="copyright">© 2026 QuickUtils. Data from <a href="https://open-meteo.com" style="color:var(--accent)">Open-Meteo</a>.</p>
+</div></footer>
+<script src="script.js"></script>
+</body>
+</html>
