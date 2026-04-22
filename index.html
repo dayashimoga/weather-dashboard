@@ -33,9 +33,13 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌤️</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <meta name="theme-color" content="#ffffff">
 </head>
 <body>
+<canvas id="bgCanvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;pointer-events:none;"></canvas>
 <nav class="navbar"><div class="container nav-inner">
     <a href="/" class="brand">🌤️ <span>WeatherDash</span></a>
     <div class="nav-links">
@@ -94,9 +98,25 @@
             <div id="dailyForecast" class="daily-grid"></div>
         </div>
 
-        <div class="glass-card">
-            <h3 class="card-title">🌡️ Temperature Chart</h3>
-            <canvas id="tempChart" width="800" height="250"></canvas>
+        <div class="glass-card" style="margin-top:20px;">
+            <h3 class="card-title">🌡️ Temperature &amp; Precipitation Chart</h3>
+            <div style="position:relative; height:280px;">
+                <canvas id="tempChart"></canvas>
+            </div>
+        </div>
+
+        <div class="glass-card" style="margin-top:20px;">
+            <h3 class="card-title">🌍 Air Quality & Health Advice</h3>
+            <div id="aqiData" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 10px;">
+            </div>
+            <div id="healthAdvice" style="background: rgba(0,0,0,0.2); padding: 12px; border-radius: 8px; font-size: 0.9rem; border-left: 4px solid var(--accent); line-height:1.5;">
+                Loading health advice...
+            </div>
+        </div>
+
+        <div class="glass-card" style="margin-top:20px;">
+            <h3 class="card-title">📡 Live Precipitation Radar</h3>
+            <div id="radarMap" style="height: 350px; border-radius: 8px; background: rgba(0,0,0,0.2); z-index: 1;"></div>
         </div>
     </div>
 </main>
@@ -105,6 +125,8 @@
     <p class="copyright">© 2026 QuickUtils. Data from <a href="https://open-meteo.com" style="color:var(--accent)">Open-Meteo</a>.</p>
 </div></footer>
 <script src="script.js"></script>
+
+
 
 
 
@@ -215,6 +237,8 @@
    </div>
 </div>
 <!-- /QuickUtils Network Promo -->
+
+
 
 
 
